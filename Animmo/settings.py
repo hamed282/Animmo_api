@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'course.apps.CourseConfig',
     'accounts.apps.AccountsConfig',
     'rest_framework_simplejwt.token_blacklist',
+    'blog.apps.BlogConfig',
 ]
 
 MIDDLEWARE = [

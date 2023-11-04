@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import HeaderImageModel, FeedbackModel
 
-# Register your models here.
+
+admin.site.register(HeaderImageModel)
+admin.site.register(FeedbackModel)

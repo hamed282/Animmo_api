@@ -31,6 +31,9 @@ class CourseModel(models.Model):
     season = models.IntegerField()
     duration = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.course
+
 
 class SampleExerciseModel(models.Model):
 
@@ -40,3 +43,30 @@ class SampleExerciseModel(models.Model):
     course = models.ForeignKey(CourseModel, on_delete=models.CASCADE, related_name='course_sample')
     sample_exercise = models.FileField(upload_to='video/sample/')
     created = models.DateTimeField(auto_now=True)
+
+
+class OrderModel(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_order')
+    paid = models.BooleanField(default=False)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.user} - {str(self.id)}'
+
+    def get_total_price(self):
+        total = sum(item.get_cost() for item in self.items_order.all())
+
+        return total
+
+
+class OrderItemModel(models.Model):
+    order = models.ForeignKey(OrderModel, on_delete=models.CASCADE, related_name='items_order')
+    course = models.ForeignKey(CourseModel, on_delete=models.CASCADE, related_name='items_course')
+    price = models.IntegerField()
+
+    def __str__(self):
+        return str(self.id)
+
+    def get_cost(self):
+        return self.price

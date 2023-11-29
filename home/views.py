@@ -7,9 +7,12 @@ from course.serializers import CourseCategorySerializer, CourseSubCategorySerial
     SampleExerciseSerializer
 from .serializers import HeaderImageSerializer, FeedbackSerializer
 from blog.serializers import BlogSerializer
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
 class IndexView(APIView):
+    authentication_classes = [JWTAuthentication]
+
     def get(self, request):
         header_image = HeaderImageModel.objects.all()
         ser_header_image = HeaderImageSerializer(instance=header_image, many=True)

@@ -9,3 +9,4 @@ class BlogModel(models.Model):
     slug = models.SlugField(max_length=100, unique=True)
     available = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
+    class_des = models.CharField(max_length=20, default='blog')

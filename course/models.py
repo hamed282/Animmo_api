@@ -6,6 +6,7 @@ class CourseCategoryModel(models.Model):
     category = models.CharField(max_length=50)
     slug = models.SlugField(max_length=100, unique=True)
     icon = models.ImageField(upload_to='images/icon/category/')
+    class_des = models.CharField(max_length=20, default='course_category')
 
 
 class CourseSubCategoryModel(models.Model):
@@ -13,6 +14,7 @@ class CourseSubCategoryModel(models.Model):
     subcategory = models.CharField(max_length=50)
     slug = models.SlugField(max_length=100, unique=True)
     image = models.ImageField(upload_to='images/course/')
+    class_des = models.CharField(max_length=20, default='course_subcategory')
 
 
 class CourseModel(models.Model):
@@ -30,6 +32,7 @@ class CourseModel(models.Model):
     discount = models.IntegerField()
     season = models.IntegerField()
     duration = models.CharField(max_length=100)
+    class_des = models.CharField(max_length=20, default='course')
 
     def __str__(self):
         return self.course
@@ -43,6 +46,7 @@ class SampleExerciseModel(models.Model):
     course = models.ForeignKey(CourseModel, on_delete=models.CASCADE, related_name='course_sample')
     sample_exercise = models.FileField(upload_to='video/sample/')
     created = models.DateTimeField(auto_now=True)
+    class_des = models.CharField(max_length=20, default='sample_exercise')
 
 
 class OrderModel(models.Model):
@@ -50,6 +54,7 @@ class OrderModel(models.Model):
     paid = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    class_des = models.CharField(max_length=20, default='order')
 
     def __str__(self):
         return f'{self.user} - {str(self.id)}'
@@ -64,6 +69,7 @@ class OrderItemModel(models.Model):
     order = models.ForeignKey(OrderModel, on_delete=models.CASCADE, related_name='items_order')
     course = models.ForeignKey(CourseModel, on_delete=models.CASCADE, related_name='items_course')
     price = models.IntegerField()
+    class_des = models.CharField(max_length=20, default='order_item')
 
     def __str__(self):
         return str(self.id)

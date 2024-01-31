@@ -3,3 +3,8 @@ Animmo/settings.py
 db.sqlite3
 
 static
+
+accounts/migrations
+blog/migrations
+course/migrations
+home/migrations

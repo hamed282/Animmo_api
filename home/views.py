@@ -37,7 +37,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 #
 #         return Response(data=(ser_header_image.data, ser_course_category.data, ser_course_subcategory.data,
 #                               ser_course.data, ser_sample_exercise.data, ser_feedback.data, ser_blog.data))
-#
+
 
 class HeaderImageView(APIView):
     # authentication_classes = [JWTAuthentication]

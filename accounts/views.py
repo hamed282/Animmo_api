@@ -14,7 +14,14 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
 class UserRegisterView(APIView):
+
     def post(self, request):
+        """
+        parameters:
+        1. first_name
+        2. last_name
+        3. phone_number
+        """
         form = request.data
         ser_data = UserSerializer(data=form)
         if ser_data.is_valid():
@@ -38,11 +45,15 @@ class UserRegisterView(APIView):
 
 
 class RegisterVerifyCodeView(APIView):
-    def get(self, request):
-        phone_number = request.session['register_information']['phone_number']
-        return Response(data={'phone_number': phone_number}, status=status.HTTP_200_OK)
+    # def get(self, request):
+    #     phone_number = request.session['register_information']['phone_number']
+    #     return Response(data={'phone_number': phone_number}, status=status.HTTP_200_OK)
 
     def post(self, request):
+        """
+        parameters:
+        1. code
+        """
         form = request.POST
         ser_data = OtpCodeSerializer(data=form)
         if ser_data.is_valid():
@@ -65,6 +76,10 @@ class RegisterVerifyCodeView(APIView):
 
 class UserLoginView(APIView):
     def post(self, request):
+        """
+        parameters:
+        1. phone_number
+        """
         form = request.data
         phone_number = persian_to_english(form['phone_number'])
         code = random.randint(10000, 99999)
@@ -77,11 +92,16 @@ class UserLoginView(APIView):
 
 
 class UserLoginVerifyView(APIView):
-    def get(self, request):
-        phone_number = request.session['phone_number']
-        return Response(data={'phone_number': phone_number})
+    # def get(self, request):
+    #     phone_number = request.session['phone_number']
+    #     return Response(data={'phone_number': phone_number})
 
     def post(self, request):
+        """
+        parameters:
+        1. code
+
+        """
         form = request.POST
         ser_data = OtpCodeSerializer(data=form)
         if ser_data.is_valid():

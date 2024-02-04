@@ -9,6 +9,11 @@ class AddCartView(APIView):
     authentication_classes = [JWTAuthentication]
 
     def post(self, request):
+        """
+        parameters:
+        1. course
+        2. price
+        """
         form = request.data
         ser_data = OrderItemSerializer(data=form)
         print('##########################################')

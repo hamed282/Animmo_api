@@ -1,12 +1,10 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from course.models import CourseCategoryModel, CourseSubCategoryModel, CourseModel, SampleExerciseModel
-from blog.models import BlogModel
 from .models import HeaderImageModel, FeedbackModel
 from course.serializers import CourseCategorySerializer, CourseSubCategorySerializer, CourseSerializer,\
     SampleExerciseSerializer
 from .serializers import HeaderImageSerializer, FeedbackSerializer
-from blog.serializers import BlogSerializer
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
@@ -100,11 +98,4 @@ class FeedbackView(APIView):
         return Response(data=ser_feedback.data)
 
 
-class BlogView(APIView):
-    # authentication_classes = [JWTAuthentication]
 
-    def get(self, request):
-        blog = BlogModel.objects.all()
-        ser_blog = BlogSerializer(instance=blog, many=True)
-
-        return Response(data=ser_blog.data)

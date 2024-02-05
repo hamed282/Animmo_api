@@ -33,9 +33,11 @@ class CourseModel(models.Model):
     season = models.IntegerField()
     duration = models.CharField(max_length=100)
     class_des = models.CharField(max_length=20, default='course')
+    created = models.DateTimeField(auto_now=True)
+    updated = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return self.course
+    def __str__(self) -> str:
+        return str(self.course)
 
 
 class SampleExerciseModel(models.Model):
@@ -51,6 +53,7 @@ class SampleExerciseModel(models.Model):
 
 class OrderModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_order')
+    course = models.ForeignKey(CourseModel, on_delete=models.CASCADE, related_name='course_order')
     paid = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

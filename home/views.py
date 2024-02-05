@@ -98,4 +98,10 @@ class FeedbackView(APIView):
         return Response(data=ser_feedback.data)
 
 
+# class CartAddView(APIView):
+#     def post(self, request):
+#         form = request.data
+#         ser_data = FeedbackSerializer(data=form)
+#         if ser_data.is_valid():
+
 

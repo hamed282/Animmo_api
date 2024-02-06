@@ -116,7 +116,7 @@ class UserLoginVerifyView(APIView):
                     token_access = AccessToken.for_user(user)
                     token_refresh = RefreshToken.for_user(user)
                     code_instance.delete()
-                    return Response(data={'access': str(token_access), 'refresh': str(token_refresh)})
+                    return Response(data={'access': str(token_access), 'refresh': str(token_refresh)}, status=status.HTTP_200_OK)
                 else:
                     return Response(data={'massage': 'invalid code'}, status=status.HTTP_400_BAD_REQUEST)
             except:

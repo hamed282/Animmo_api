@@ -117,6 +117,8 @@ class UserLoginVerifyView(APIView):
                     token_refresh = RefreshToken.for_user(user)
                     code_instance.delete()
                     return Response(data={'access': str(token_access), 'refresh': str(token_refresh)})
+                else:
+                    return Response(data={'massage': 'invalid code'})
             except:
                 user = None
 

@@ -118,7 +118,7 @@ class UserLoginVerifyView(APIView):
                     code_instance.delete()
                     return Response(data={'access': str(token_access), 'refresh': str(token_refresh)})
                 else:
-                    return Response(data={'massage': 'invalid code'}, status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
+                    return Response(data={'massage': 'invalid code'}, status=status.HTTP_400_BAD_REQUEST)
             except:
                 user = None
 

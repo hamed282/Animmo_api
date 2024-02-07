@@ -41,7 +41,7 @@ class UserRegisterView(APIView):
                 return Response(data={'message': 'این شماره تلفن قبلا ثبت شده است!'},
                                 status=status.HTTP_400_BAD_REQUEST)
         else:
-            return Response(data=(ser_data.errors, {'massage': 'دوباره تلاش کنید!'}), status=status.HTTP_400_BAD_REQUEST)
+            return Response(data=(ser_data.errors, {'massage': 'دوباره تلاش کنید!'}))
 
 
 class RegisterVerifyCodeView(APIView):
@@ -69,9 +69,9 @@ class RegisterVerifyCodeView(APIView):
 
                 return Response(data=(ser_data.data, {'massage': 'ثبت نام با موفقیت انجام شد!'}), status=status.HTTP_201_CREATED)
             else:
-                return Response(data={'massage': 'کد یکبار مصرف اشتباه است!'}, status=status.HTTP_400_BAD_REQUEST)
+                return Response(data={'massage': 'کد یکبار مصرف اشتباه است!'})
         else:
-            return Response(data=(ser_data.errors, {'massage': 'دوباره تلاش کنید!'}), status=status.HTTP_400_BAD_REQUEST)
+            return Response(data=(ser_data.errors, {'massage': 'دوباره تلاش کنید!'}))
 
 
 class UserLoginView(APIView):

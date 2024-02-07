@@ -37,11 +37,9 @@ class UserRegisterView(APIView):
                     OtpCode.objects.get(phone_number=phone_number).delete()
                 OtpCode.objects.create(phone_number=phone_number, code=code)
                 return Response(data=(ser_data.data, {'massage': 'کد یکبار مصرف ارسال شد!'}), status=status.HTTP_200_OK)
-            else:
-                return Response(data={'message': 'این شماره تلفن قبلا ثبت شده است!'},
-                                status=status.HTTP_400_BAD_REQUEST)
+
         else:
-            return Response(data=(ser_data.errors, {'massage': 'دوباره تلاش کنید!'}))
+            return Response(data=({'massage': 'این شماره تلفن قبلا ثبت شده است!'}), status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
 
 
 class RegisterVerifyCodeView(APIView):
@@ -69,9 +67,9 @@ class RegisterVerifyCodeView(APIView):
 
                 return Response(data=(ser_data.data, {'massage': 'ثبت نام با موفقیت انجام شد!'}), status=status.HTTP_201_CREATED)
             else:
-                return Response(data={'massage': 'کد یکبار مصرف اشتباه است!'})
+                return Response(data={'massage': 'کد یکبار مصرف اشتباه است!'}, status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
         else:
-            return Response(data=(ser_data.errors, {'massage': 'دوباره تلاش کنید!'}))
+            return Response(data=({'massage': 'دوباره تلاش کنید!'}), status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
 
 
 class UserLoginView(APIView):
@@ -83,7 +81,11 @@ class UserLoginView(APIView):
         form = request.data
         phone_number = persian_to_english(form['phone_number'])
         code = random.randint(10000, 99999)
-        send_otp_code_login(phone_number=phone_number, code=code)
+
+        if User.objects.filter(phone_number=phone_number).exists():
+            send_otp_code_login(phone_number=phone_number, code=code)
+        else:
+            return Response(data={'massage': 'این شماره تلفن ثبت نشده است!'}, status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
         if OtpCode.objects.filter(phone_number=phone_number).exists():
             OtpCode.objects.get(phone_number=phone_number).delete()
         OtpCode.objects.create(phone_number=phone_number, code=code)
@@ -108,7 +110,7 @@ class UserLoginVerifyView(APIView):
             code = form['code']
             phone_number = persian_to_english(request.session['phone_number'])
             if not OtpCode.objects.filter(phone_number=phone_number).exists():
-                return Response(data={'massage': 'دوباره تلاش کنید!'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                return Response(data={'massage': 'این شماره تلفن ثبت نشده است!'}, status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
             code_instance = OtpCode.objects.get(phone_number=phone_number)
             try:
                 user = User.objects.get(phone_number=phone_number)
@@ -118,7 +120,7 @@ class UserLoginVerifyView(APIView):
                     code_instance.delete()
                     return Response(data={'massage': 'ورود با موفقیت انجام شد!', 'access': str(token_access), 'refresh': str(token_refresh)}, status=status.HTTP_200_OK)
                 else:
-                    return Response(data={'massage': 'کد یکبار مصرف اشتباه است!'}, status=status.HTTP_400_BAD_REQUEST)
+                    return Response(data={'massage': 'کد یکبار مصرف اشتباه است!'}, status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
             except:
                 user = None
 

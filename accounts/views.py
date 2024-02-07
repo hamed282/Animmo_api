@@ -36,12 +36,12 @@ class UserRegisterView(APIView):
                 if OtpCode.objects.filter(phone_number=phone_number).exists():
                     OtpCode.objects.get(phone_number=phone_number).delete()
                 OtpCode.objects.create(phone_number=phone_number, code=code)
-                return Response(data=ser_data.data, status=status.HTTP_200_OK)
+                return Response(data=(ser_data.data, {'massage': 'کد یکبار مصرف ارسال شد!'}), status=status.HTTP_200_OK)
             else:
-                return Response(data={'message': 'user with this phone number already exists.'},
+                return Response(data={'message': 'این شماره تلفن قبلا ثبت شده است!'},
                                 status=status.HTTP_400_BAD_REQUEST)
         else:
-            return Response(data=ser_data.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(data=(ser_data.errors, {'massage': 'دوباره تلاش کنید!'}), status=status.HTTP_400_BAD_REQUEST)
 
 
 class RegisterVerifyCodeView(APIView):
@@ -67,11 +67,11 @@ class RegisterVerifyCodeView(APIView):
                                          phone_number=register_info['phone_number'])
                 code_instance.delete()
 
-                return Response(data=ser_data.data, status=status.HTTP_201_CREATED)
+                return Response(data=(ser_data.data, {'massage': 'ثبت نام با موفقیت انجام شد!'}), status=status.HTTP_201_CREATED)
             else:
-                return Response(data={'massage': 'The codes do not match'}, status=status.HTTP_400_BAD_REQUEST)
+                return Response(data={'massage': 'کد یکبار مصرف اشتباه است!'}, status=status.HTTP_400_BAD_REQUEST)
         else:
-            return Response(data=ser_data.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(data=(ser_data.errors, {'massage': 'دوباره تلاش کنید!'}), status=status.HTTP_400_BAD_REQUEST)
 
 
 class UserLoginView(APIView):
@@ -88,7 +88,7 @@ class UserLoginView(APIView):
             OtpCode.objects.get(phone_number=phone_number).delete()
         OtpCode.objects.create(phone_number=phone_number, code=code)
         request.session['phone_number'] = phone_number
-        return Response(data={'phone_number': phone_number})
+        return Response(data={'massage': 'کد یکبار مصرف ارسال شد!', 'phone_number': phone_number})
 
 
 class UserLoginVerifyView(APIView):
@@ -108,7 +108,7 @@ class UserLoginVerifyView(APIView):
             code = form['code']
             phone_number = persian_to_english(request.session['phone_number'])
             if not OtpCode.objects.filter(phone_number=phone_number).exists():
-                return Response(data={'massage': 'invalid data'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                return Response(data={'massage': 'دوباره تلاش کنید!'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
             code_instance = OtpCode.objects.get(phone_number=phone_number)
             try:
                 user = User.objects.get(phone_number=phone_number)
@@ -116,9 +116,9 @@ class UserLoginVerifyView(APIView):
                     token_access = AccessToken.for_user(user)
                     token_refresh = RefreshToken.for_user(user)
                     code_instance.delete()
-                    return Response(data={'access': str(token_access), 'refresh': str(token_refresh)}, status=status.HTTP_200_OK)
+                    return Response(data={'massage': 'ورود با موفقیت انجام شد!', 'access': str(token_access), 'refresh': str(token_refresh)}, status=status.HTTP_200_OK)
                 else:
-                    return Response(data={'massage': 'invalid code'}, status=status.HTTP_400_BAD_REQUEST)
+                    return Response(data={'massage': 'کد یکبار مصرف اشتباه است!'}, status=status.HTTP_400_BAD_REQUEST)
             except:
                 user = None
 

@@ -88,7 +88,7 @@ class UserLoginView(APIView):
             OtpCode.objects.get(phone_number=phone_number).delete()
         OtpCode.objects.create(phone_number=phone_number, code=code)
         request.session['phone_number'] = phone_number
-        return Response(data={'massage': 'کد یکبار مصرف ارسال شد!', 'phone_number': phone_number})
+        return Response(data={'massage': 'کد یکبار مصرف ارسال شد!', 'phone_number': phone_number}, status=status.HTTP_200_OK)
 
 
 class UserLoginVerifyView(APIView):

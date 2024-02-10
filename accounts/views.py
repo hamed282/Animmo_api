@@ -50,7 +50,8 @@ class RegisterVerifyCodeView(APIView):
     def post(self, request):
         """
         parameters:
-        1. code
+        1. phone_number
+        2. code
         """
         form = request.POST
         ser_data = OtpCodeSerializer(data=form)
@@ -58,18 +59,18 @@ class RegisterVerifyCodeView(APIView):
             register_info = request.session['register_information']
 
             if not OtpCode.objects.filter(phone_number=register_info['phone_number']).exists():
-                return Response(data={'massage': 'invalid data'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                return Response(data={'massage': 'کد یکبار مصرف اشتباه است!', 'status': '203'}, status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
             code_instance = OtpCode.objects.get(phone_number=register_info['phone_number'])
             if int(code_instance.code) == int(persian_to_english(form['code'])):
                 User.objects.create_user(first_name=register_info['first_name'], last_name=register_info['last_name'],
                                          phone_number=register_info['phone_number'])
                 code_instance.delete()
 
-                return Response(data=(ser_data.data, {'massage': 'ثبت نام با موفقیت انجام شد!'}), status=status.HTTP_201_CREATED)
+                return Response(data=(ser_data.data, {'massage': 'ثبت نام با موفقیت انجام شد!', 'status': '201'}), status=status.HTTP_201_CREATED)
             else:
-                return Response(data={'massage': 'کد یکبار مصرف اشتباه است!'}, status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
+                return Response(data={'massage': 'کد یکبار مصرف اشتباه است!', 'status': '203'}, status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
         else:
-            return Response(data=({'massage': 'دوباره تلاش کنید!'}), status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
+            return Response(data=({'massage': 'کد یکبار مصرف اشتباه است!', 'status': '203'}), status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
 
 
 class UserLoginView(APIView):
@@ -101,7 +102,8 @@ class UserLoginVerifyView(APIView):
     def post(self, request):
         """
         parameters:
-        1. code
+        1. phone_number
+        2. code
 
         """
         form = request.POST
@@ -110,7 +112,7 @@ class UserLoginVerifyView(APIView):
             code = form['code']
             phone_number = persian_to_english(request.session['phone_number'])
             if not OtpCode.objects.filter(phone_number=phone_number).exists():
-                return Response(data={'massage': 'این شماره تلفن ثبت نشده است!'}, status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
+                return Response(data={'massage': 'کد یکبار مصرف اشتباه است!'}, status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
             code_instance = OtpCode.objects.get(phone_number=phone_number)
             try:
                 user = User.objects.get(phone_number=phone_number)
@@ -124,7 +126,7 @@ class UserLoginVerifyView(APIView):
             except:
                 user = None
 
-        return Response(data=ser_data.errors)
+        return Response(data={'massage': 'کد یکبار مصرف اشتباه است!'}, status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
 
 
 class UserLogout(APIView):

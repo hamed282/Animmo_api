@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'drf_spectacular',
     'cart.apps.CartConfig',
+    'user_panel.apps.UserPanelConfig',
 ]
 
 MIDDLEWARE = [

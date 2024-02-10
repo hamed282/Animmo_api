@@ -41,6 +41,7 @@ class SampleExerciseSerializer(serializers.ModelSerializer):
 
 class OrderSerializer(serializers.ModelSerializer):
     get_total_price = serializers.CharField()
+
     class Meta:
         model = OrderModel
         fields = '__all__'

@@ -19,7 +19,7 @@ class CourseSubCategoryModel(models.Model):
 
 class CourseModel(models.Model):
 
-    category = models.ForeignKey(CourseSubCategoryModel, on_delete=models.CASCADE, related_name='category_course')
+    category = models.ForeignKey(CourseCategoryModel, on_delete=models.CASCADE, related_name='category_course')
     subcategory = models.ForeignKey(CourseSubCategoryModel, on_delete=models.CASCADE, related_name='subcategory_course')
     course = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100, unique=True)

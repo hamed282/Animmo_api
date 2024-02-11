@@ -53,7 +53,7 @@ class RegisterVerifyCodeView(APIView):
         1. phone_number
         2. code
         """
-        form = request.POST
+        form = request.data
         ser_data = OtpCodeSerializer(data=form)
         if ser_data.is_valid():
             register_info = request.session['register_information']
@@ -106,7 +106,7 @@ class UserLoginVerifyView(APIView):
         2. code
 
         """
-        form = request.POST
+        form = request.data
         ser_data = OtpCodeSerializer(data=form)
         if ser_data.is_valid():
             code = form['code']

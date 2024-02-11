@@ -1,13 +1,6 @@
-Animmo/settings.py
+#Animmo/settings.py
 
-db.sqlite3
+#db.sqlite3
 
-static
-media
-
-#accounts/migrations
-#blog/migrations
-#course/migrations
-#home/migrations
-#cart/migrations
-#user_panel/migrations
+#static
+#media

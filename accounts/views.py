@@ -43,9 +43,6 @@ class UserRegisterView(APIView):
 
 
 class RegisterVerifyCodeView(APIView):
-    # def get(self, request):
-    #     phone_number = request.session['register_information']['phone_number']
-    #     return Response(data={'phone_number': phone_number}, status=status.HTTP_200_OK)
 
     def post(self, request):
         """
@@ -56,14 +53,13 @@ class RegisterVerifyCodeView(APIView):
         form = request.data
         ser_data = OtpCodeSerializer(data=form)
         if ser_data.is_valid():
-            register_info = request.session['register_information']
 
-            if not OtpCode.objects.filter(phone_number=register_info['phone_number']).exists():
+            if not OtpCode.objects.filter(phone_number=form['phone_number']).exists():
                 return Response(data={'massage': 'کد یکبار مصرف اشتباه است!', 'status': '203'}, status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
-            code_instance = OtpCode.objects.get(phone_number=register_info['phone_number'])
+            code_instance = OtpCode.objects.get(phone_number=form['phone_number'])
             if int(code_instance.code) == int(persian_to_english(form['code'])):
-                User.objects.create_user(first_name=register_info['first_name'], last_name=register_info['last_name'],
-                                         phone_number=register_info['phone_number'])
+                User.objects.create_user(first_name=form['first_name'], last_name=form['last_name'],
+                                         phone_number=form['phone_number'])
                 code_instance.delete()
 
                 return Response(data=(ser_data.data, {'massage': 'ثبت نام با موفقیت انجام شد!', 'status': '201'}), status=status.HTTP_201_CREATED)
@@ -95,9 +91,6 @@ class UserLoginView(APIView):
 
 
 class UserLoginVerifyView(APIView):
-    # def get(self, request):
-    #     phone_number = request.session['phone_number']
-    #     return Response(data={'phone_number': phone_number})
 
     def post(self, request):
         """
@@ -110,7 +103,7 @@ class UserLoginVerifyView(APIView):
         ser_data = OtpCodeSerializer(data=form)
         if ser_data.is_valid():
             code = form['code']
-            phone_number = persian_to_english(request.session['phone_number'])
+            phone_number = persian_to_english(form['phone_number'])
             if not OtpCode.objects.filter(phone_number=phone_number).exists():
                 return Response(data={'massage': 'کد یکبار مصرف اشتباه است!'}, status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
             code_instance = OtpCode.objects.get(phone_number=phone_number)

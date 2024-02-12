@@ -8,6 +8,9 @@ class CourseCategoryModel(models.Model):
     icon = models.ImageField(upload_to='images/icon/category/')
     class_des = models.CharField(max_length=20, default='course_category')
 
+    def __str__(self):
+        return self.slug
+
 
 class CourseSubCategoryModel(models.Model):
     category = models.ForeignKey(CourseCategoryModel, on_delete=models.CASCADE, related_name='category_subcategory')
@@ -15,6 +18,9 @@ class CourseSubCategoryModel(models.Model):
     slug = models.SlugField(max_length=100, unique=True)
     image = models.ImageField(upload_to='images/course/')
     class_des = models.CharField(max_length=20, default='course_subcategory')
+
+    def __str__(self):
+        return self.slug
 
 
 class CourseModel(models.Model):
@@ -49,6 +55,9 @@ class SampleExerciseModel(models.Model):
     sample_exercise = models.FileField(upload_to='video/sample/')
     created = models.DateTimeField(auto_now=True)
     class_des = models.CharField(max_length=20, default='sample_exercise')
+
+    def __str__(self):
+        return self.category
 
 
 class OrderModel(models.Model):

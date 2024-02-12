@@ -41,10 +41,10 @@ class HeaderImageView(APIView):
     # authentication_classes = [JWTAuthentication]
 
     def get(self, request):
-        header_image = HeaderImageModel.objects.all()
-        ser_header_image = HeaderImageSerializer(instance=header_image, many=True)
+        home_setting = HomeSettingModel.objects.all()
+        ser_home_setting = HeaderImageSerializer(instance=home_setting, many=True)
 
-        return Response(data=ser_header_image.data)
+        return Response(data=ser_home_setting.data)
 
 
 class CourseCategoryView(APIView):

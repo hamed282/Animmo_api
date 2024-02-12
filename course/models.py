@@ -6,6 +6,7 @@ class CourseCategoryModel(models.Model):
     category = models.CharField(max_length=50)
     slug = models.SlugField(max_length=100, unique=True)
     icon = models.ImageField(upload_to='images/icon/category/')
+    hovered_icon = models.ImageField(upload_to='images/icon/category/')
     class_des = models.CharField(max_length=20, default='course_category')
 
     def __str__(self):

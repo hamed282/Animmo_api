@@ -52,17 +52,19 @@ class RegisterVerifyCodeView(APIView):
         parameters:
         1. phone_number
         2. code
+        3. first_name
+        4. last_name
         """
         form = request.data
         ser_data = OtpCodeSerializer(data=form)
         if ser_data.is_valid():
-            register_info = request.session['register_information']
+            # register_info = request.session['register_information']
 
             if not OtpCode.objects.filter(phone_number=form['phone_number']).exists():
                 return Response(data={'massage': 'کد یکبار مصرف اشتباه است!', 'status': '203'}, status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
             code_instance = OtpCode.objects.get(phone_number=form['phone_number'])
             if int(code_instance.code) == int(persian_to_english(form['code'])):
-                User.objects.create_user(first_name=register_info['first_name'], last_name=register_info['last_name'],
+                User.objects.create_user(first_name=form['first_name'], last_name=form['last_name'],
                                          phone_number=form['phone_number'])
                 code_instance.delete()
 

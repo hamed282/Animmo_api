@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import HeaderImageModel, FeedbackModel
+from .models import HomeSettingModel, FeedbackModel
 
 
-admin.site.register(HeaderImageModel)
+admin.site.register(HomeSettingModel)
 admin.site.register(FeedbackModel)

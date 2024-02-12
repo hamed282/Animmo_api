@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from course.models import CourseCategoryModel, CourseSubCategoryModel, CourseModel, SampleExerciseModel
-from .models import HeaderImageModel, FeedbackModel
+from .models import HomeSettingModel, FeedbackModel
 from course.serializers import CourseCategorySerializer, CourseSubCategorySerializer, CourseSerializer,\
     SampleExerciseSerializer
 from .serializers import HeaderImageSerializer, FeedbackSerializer

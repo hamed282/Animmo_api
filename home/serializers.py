@@ -1,12 +1,11 @@
 from rest_framework import serializers
-from .models import HeaderImageModel, FeedbackModel
+from .models import HomeSettingModel, FeedbackModel
 
 
 class HeaderImageSerializer(serializers.ModelSerializer):
-    category = serializers.SlugRelatedField(read_only=True, slug_field='slug')
 
     class Meta:
-        model = HeaderImageModel
+        model = HomeSettingModel
         fields = '__all__'
 
 

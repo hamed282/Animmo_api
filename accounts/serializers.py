@@ -8,10 +8,13 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['first_name', 'last_name', 'phone_number']
 
 
-class OtpCodeSerializer(serializers.ModelSerializer):
+class OtpCodeRegisterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OtpCode
+        fields = ['phone_number', 'code', 'first_name', 'last_name']
+
+
+class OtpCodeLoginSerializer(serializers.ModelSerializer):
     class Meta:
         model = OtpCode
         fields = ['phone_number', 'code']
-
-
-

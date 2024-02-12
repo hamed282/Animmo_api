@@ -6,7 +6,7 @@ from .models import OtpCode, User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import logout
 from convert_numbers import persian_to_english
-from .serializers import UserSerializer, OtpCodeSerializer
+from .serializers import UserSerializer, OtpCodeRegisterSerializer, OtpCodeLoginSerializer
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 from rest_framework.permissions import IsAuthenticated
@@ -56,7 +56,7 @@ class RegisterVerifyCodeView(APIView):
         4. last_name
         """
         form = request.data
-        ser_data = OtpCodeSerializer(data=form)
+        ser_data = OtpCodeRegisterSerializer(data=form)
         if ser_data.is_valid():
             # register_info = request.session['register_information']
 
@@ -109,10 +109,10 @@ class UserLoginVerifyView(APIView):
 
         """
         form = request.data
-        ser_data = OtpCodeSerializer(data=form)
+        ser_data = OtpCodeLoginSerializer(data=form)
         if ser_data.is_valid():
             code = form['code']
-            phone_number = persian_to_english(request.session['phone_number'])
+            phone_number = persian_to_english(form['phone_number'])
             if not OtpCode.objects.filter(phone_number=phone_number).exists():
                 return Response(data={'massage': 'کد یکبار مصرف اشتباه است!'}, status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
             code_instance = OtpCode.objects.get(phone_number=phone_number)

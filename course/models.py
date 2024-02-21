@@ -49,6 +49,10 @@ class CourseModel(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+    def save(self, **kwargs):
+        self.slug = slugify(f'{self.subcategory} {self.category} {self.course}', allow_unicode=True)
+        super(CourseModel, self).save(**kwargs)
+
     def __str__(self) -> str:
         return str(self.course)
 

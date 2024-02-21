@@ -28,14 +28,9 @@ class CourseSubCategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def get_count_course(self, obj):
-        a = CourseModel.objects.filter(subcategory=obj.id).count()
-        # b = a.subcategory_course.all()
-        # c = obj.slug
-        # price = obj.price
-        # percent_discount = obj.percent_discount
-        # if obj.percent_discount is None:
-        #     percent_discount = 0
-        return a
+        count_course = CourseModel.objects.filter(subcategory=obj.id).count()
+
+        return count_course
 
 
 

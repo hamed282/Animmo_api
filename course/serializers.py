@@ -3,6 +3,14 @@ from .models import CourseCategoryModel, CourseSubCategoryModel, CourseModel, Sa
     OrderItemModel
 
 
+# class CourseSubcategoryListSerializer(serializers.ModelSerializer):
+#     category = serializers.SlugRelatedField(slug_field='category', read_only=True)
+#
+#     class Meta:
+#         model = CourseModel
+#         fields = ['category', 'subcategory', 'image']
+
+
 class CourseCategorySerializer(serializers.ModelSerializer):
     # category = serializers.SlugRelatedField(read_only=True, slug_field='slug')
 
@@ -13,10 +21,22 @@ class CourseCategorySerializer(serializers.ModelSerializer):
 
 class CourseSubCategorySerializer(serializers.ModelSerializer):
     category = serializers.SlugRelatedField(read_only=True, slug_field='slug')
+    count_course = serializers.SerializerMethodField()
 
     class Meta:
         model = CourseSubCategoryModel
         fields = '__all__'
+
+    def get_count_course(self, obj):
+        a = CourseModel.objects.filter(subcategory=obj.id).count()
+        # b = a.subcategory_course.all()
+        # c = obj.slug
+        # price = obj.price
+        # percent_discount = obj.percent_discount
+        # if obj.percent_discount is None:
+        #     percent_discount = 0
+        return a
+
 
 
 class CourseSerializer(serializers.ModelSerializer):

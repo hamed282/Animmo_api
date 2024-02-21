@@ -1,9 +1,21 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import OrderSerializer, OrderItemSerializer
-from .models import OrderModel, OrderItemModel, CourseModel
+from .serializers import OrderItemSerializer
+from .models import OrderModel, OrderItemModel, CourseModel, CourseCategoryModel, CourseSubCategoryModel
+# from .serializers import CourseSubcategoryListSerializer
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
+
+# class CourseCategoryListView(APIView):
+#     def get(self, request):
+#         category = CourseCategoryModel.objects.get(category='سه بعدی')
+#         product = CourseSubCategoryModel.objects.filter(category=category)
+#         ser_product = CourseSubcategoryListSerializer(instance=product, many=True)
+#
+#         # subcategory =
+#         count_course = CourseModel.objects.filter(subcategory=)
+#         print(product)
+#         return Response(data=ser_product.data)
 
 class AddCartView(APIView):
     authentication_classes = [JWTAuthentication]

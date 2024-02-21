@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework.views import APIView
 from .service import Cart
 from rest_framework.response import Response
@@ -12,7 +11,7 @@ class CartAPI(APIView):
 
         return Response(
             {"data": list(cart.__iter__()),
-            "cart_total_price" : cart.get_total_price()},
+             "cart_total_price": cart.get_total_price()},
             status=status.HTTP_200_OK
             )
 
@@ -27,19 +26,15 @@ class CartAPI(APIView):
         """
         cart = Cart(request)
         if request.data["remove"] == 'true':
-            print('dddd')
             product = request.data["id"]
             cart.remove(product)
 
         elif request.data["clear"] == 'true':
-            print('sss')
             cart.clear()
 
         else:
             product_id = request.data["id"]
             price = request.data["price"]
-            print(product_id)
-            print(price)
             cart.add(
                     product_id=product_id,
                     price=price

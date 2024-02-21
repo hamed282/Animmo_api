@@ -59,7 +59,6 @@ class CourseCategoryView(APIView):
 
 class CourseSubcategoryView(APIView):
     # authentication_classes = [JWTAuthentication]
-
     def get(self, request):
         course_subcategory = CourseSubCategoryModel.objects.all()
         ser_course_subcategory = CourseSubCategorySerializer(instance=course_subcategory, many=True)

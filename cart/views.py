@@ -23,7 +23,17 @@ class CartAPI(APIView):
         3. remove # true or false
         4. clear # true or false
 
+        sample json:
+
+        {
+            "id": "2",
+            "price":"300000",
+            "remove":"false",
+            "clear":"true"
+        }
         """
+
+
         cart = Cart(request)
         if request.data["remove"] == 'true':
             product = request.data["id"]

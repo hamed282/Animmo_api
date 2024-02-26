@@ -33,14 +33,21 @@ class CourseSubCategorySerializer(serializers.ModelSerializer):
         return count_course
 
 
-
 class CourseSerializer(serializers.ModelSerializer):
     subcategory = serializers.SlugRelatedField(read_only=True, slug_field='slug')
     category = serializers.SlugRelatedField(read_only=True, slug_field='slug')
+    off_price = serializers.SerializerMethodField()
 
     class Meta:
         model = CourseModel
         fields = '__all__'
+
+    def get_off_price(self, obj):
+        price = obj.price
+        percent_discount = obj.percent_discount
+        if obj.percent_discount is None:
+            percent_discount = 0
+        return int(price - price * percent_discount / 100)
 
 
 class SampleExerciseSerializer(serializers.ModelSerializer):

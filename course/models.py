@@ -42,6 +42,7 @@ class CourseModel(models.Model):
     spot_player_license = models.CharField(max_length=512)
     is_active = models.BooleanField(default=False)
     price = models.IntegerField()
+    percent_discount = models.IntegerField(null=True, blank=True)
     teacher = models.CharField(max_length=100)
     discount = models.IntegerField()
     season = models.IntegerField()

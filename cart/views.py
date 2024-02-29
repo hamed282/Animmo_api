@@ -66,6 +66,17 @@ class CartPayView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
+        """
+        parameters:
+        1. course_id # course id
+
+
+        sample json:
+
+        [
+        {"course_id": "2"} , {"course_id": "2"}
+        ]
+        """
         forms = request.data
         if len(forms) > 0:
 

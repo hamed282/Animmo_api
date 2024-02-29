@@ -13,6 +13,9 @@ class Cart:
         initialize the cart
         """
         self.session = request.session
+        print('----------------')
+        print(request.session.session_key)
+
         cart = self.session.get(settings.CART_SESSION_ID)
         if not cart:
             # save an empty cart in session

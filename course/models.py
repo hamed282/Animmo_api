@@ -33,6 +33,7 @@ class CourseSubCategoryModel(models.Model):
 
 class CourseModel(models.Model):
 
+    objects = None
     category = models.ForeignKey(CourseCategoryModel, on_delete=models.CASCADE, related_name='category_course')
     subcategory = models.ForeignKey(CourseSubCategoryModel, on_delete=models.CASCADE, related_name='subcategory_course')
     course = models.CharField(max_length=100)
@@ -56,6 +57,13 @@ class CourseModel(models.Model):
 
     def __str__(self) -> str:
         return str(self.course)
+
+    def get_off_price(self):
+        price = self.price
+        percent_discount = self.percent_discount
+        if self.percent_discount is None:
+            percent_discount = 0
+        return int(price - price * percent_discount / 100)
 
 
 class SampleExerciseModel(models.Model):

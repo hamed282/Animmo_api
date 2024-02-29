@@ -1,13 +1,17 @@
 from rest_framework.views import APIView
-from course.models import CourseModel
 from rest_framework.response import Response
 from accounts.models import User
 from .serializers import UserCourseSerializer
 from .models import UserCourseModel
 from django.shortcuts import get_object_or_404
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 
 class MyCourseView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
     def post(self, request):
         """
         parameters:

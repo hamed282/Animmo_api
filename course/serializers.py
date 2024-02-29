@@ -61,19 +61,19 @@ class SampleExerciseSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class OrderSerializer(serializers.ModelSerializer):
-    get_total_price = serializers.CharField()
-
-    class Meta:
-        model = OrderModel
-        fields = '__all__'
-
-
-class OrderItemSerializer(serializers.Serializer):
-    # class Meta:
-    #     model = OrderItemModel
-    #     fields = ['price']
-    price = serializers.CharField()
-    course = serializers.CharField()
+# class OrderSerializer(serializers.ModelSerializer):
+#     get_total_price = serializers.CharField()
+#
+#     class Meta:
+#         model = OrderModel
+#         fields = '__all__'
+#
+#
+# class OrderItemSerializer(serializers.Serializer):
+#     # class Meta:
+#     #     model = OrderItemModel
+#     #     fields = ['price']
+#     price = serializers.CharField()
+#     course = serializers.CharField()
 
 

@@ -1,5 +1,6 @@
 from django.db import models
 from accounts.models import User
+from django.utils.html import mark_safe
 
 
 class HomeSettingModel(models.Model):
@@ -8,6 +9,9 @@ class HomeSettingModel(models.Model):
     header_logo = models.FileField(upload_to='images/home_setting/')
     footer_logo = models.FileField(upload_to='images/home_setting/')
     class_des = models.CharField(max_length=20, default='image_header')
+    def banner_tag(self):
+        return mark_safe('<img src="%s" width="100px" height="100px" />'%(self.banner.url))
+    banner_tag.short_description = 'Image'
 
 
 class FeedbackModel(models.Model):

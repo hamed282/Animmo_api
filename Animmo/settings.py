@@ -74,7 +74,10 @@ INSTALLED_APPS = [
     'cart.apps.CartConfig',
     'user_panel.apps.UserPanelConfig',
 ]
-LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
+
+SITE_ROOT = os.path.dirname(os.path.realpath(__name__))
+LOCALE_PATHS = (os.path.join(SITE_ROOT, 'locale'), )
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

@@ -1,6 +1,6 @@
 #Animmo/settings.py
 
-#db.sqlite3
+db.sqlite3
 
 static
 media

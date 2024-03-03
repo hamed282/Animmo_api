@@ -18,7 +18,7 @@ SECRET_KEY = 'django-insecure-@^mt)pp$*muc8kzp#02w@ww+5fxji8pqdi&6makp4@2+%t#$)e
 DEBUG = True
 
 if DEBUG:
-    ALLOWED_HOSTS = []
+    ALLOWED_HOSTS = ['*']
     CALLBACK_URL = 'http://127.0.0.1:8000/api/cart/zarin/verify/'
 
     DATABASES = {

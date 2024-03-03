@@ -122,7 +122,7 @@ class UserLoginVerifyView(APIView):
                     token_access = AccessToken.for_user(user)
                     token_refresh = RefreshToken.for_user(user)
                     code_instance.delete()
-                    return Response(data={'massage': 'ورود با موفقیت انجام شد!', 'access': str(token_access), 'refresh': str(token_refresh)}, status=status.HTTP_200_OK)
+                    return Response(data={'massage': 'ورود با موفقیت انجام شد!', 'access': token_access, 'refresh': token_refresh}, status=status.HTTP_200_OK)
                 else:
                     return Response(data={'massage': 'کد یکبار مصرف اشتباه است!'}, status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
             except:

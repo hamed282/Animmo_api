@@ -36,21 +36,14 @@ else:
     ALLOWED_HOSTS = ['localhost', '185.105.239.50', 'animmo.ir', 'www.animmo.ir', '127.0.0.1']
     CALLBACK_URL = 'https://animmo.ir/api/cart/zarin/verify/'
 
-    # DATABASES = {
-    #     'default': {
-    #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #         'NAME': 'animmo_db',
-    #         'USER': 'animmo_user_db',
-    #         'PASSWORD': 'wdeds@@#434H!',
-    #         'HOST': 'localhost',
-    #         'PORT': '',
-    #     }
-    # }
-
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'animmo_db',
+            'USER': 'animmo_user_db',
+            'PASSWORD': 'wdeds@@#434H!',
+            'HOST': 'localhost',
+            'PORT': '',
         }
     }
 

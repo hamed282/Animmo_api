@@ -39,7 +39,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 
 class HeaderImageView(APIView):
     # authentication_classes = [JWTAuthentication]
-
+    # permission_classes = [IsAuthenticated]
     def get(self, request):
         home_setting = HomeSettingModel.objects.all()
         ser_home_setting = HeaderImageSerializer(instance=home_setting, many=True)

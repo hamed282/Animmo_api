@@ -32,8 +32,6 @@ if DEBUG:
     STATICFILES_DIRS = (
         os.path.join(BASE_DIR, 'static/'),
     )
-
-    sandbox = 'sandbox'
 else:
     ALLOWED_HOSTS = ['localhost', '185.105.239.50', 'animmo.ir', 'www.animmo.ir', '127.0.0.1']
     CALLBACK_URL = 'https://animmo.ir/api/cart/zarin/verify/'
@@ -53,8 +51,6 @@ else:
     STATIC_ROOT = "staticfiles"
 
     CSRF_TRUSTED_ORIGINS = ['https://*.animmo.ir', 'https://*.127.0.0.1']
-
-    sandbox = 'www'
 
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -223,6 +219,13 @@ LANGUAGES = [
 ]
 
 MERCHANT = "af49f6e8-a461-4a6f-ad2c-4883f7098ae4"
+SANDBOX = True
+
+if SANDBOX:
+    sandbox = 'sandbox'
+else:
+    sandbox = 'www'
+
 
 ZP_API_REQUEST = f"https://{sandbox}.zarinpal.com/pg/rest/WebGate/PaymentRequest.json"
 ZP_API_VERIFY = f"https://{sandbox}.zarinpal.com/pg/rest/WebGate/PaymentVerification.json"

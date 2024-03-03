@@ -1,7 +1,8 @@
-# from rest_framework.views import APIView
-# from rest_framework.response import Response
-# from .serializers import OrderItemSerializer
-# from .models import OrderModel, OrderItemModel, CourseModel, CourseCategoryModel, CourseSubCategoryModel
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from django.shortcuts import get_object_or_404
+from .serializers import CourseViewSerializer
+from .models import CourseModel
 # # from .serializers import CourseSubcategoryListSerializer
 # from rest_framework_simplejwt.authentication import JWTAuthentication
 
@@ -48,3 +49,13 @@
 #         ser_order = OrderItemSerializer(instance=orders, many=True)
 #
 #         return Response(data=(ser_order.data, {'total_price': order.get_total_price()}))
+
+
+class ViewCourseView(APIView):
+    def get(self, request):
+        course_slug = self.request.query_params.get('slug', None)
+
+        course = get_object_or_404(CourseModel, slug=course_slug)
+        ser_course = CourseViewSerializer(instance=course)
+
+        return Response(data=ser_course.data)

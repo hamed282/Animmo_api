@@ -76,4 +76,10 @@ class SampleExerciseSerializer(serializers.ModelSerializer):
 #     price = serializers.CharField()
 #     course = serializers.CharField()
 
+class CourseViewSerializer(serializers.ModelSerializer):
+    subcategory = serializers.SlugRelatedField(read_only=True, slug_field='slug')
+    category = serializers.SlugRelatedField(read_only=True, slug_field='slug')
 
+    class Meta:
+        model = CourseModel
+        fields = '__all__'

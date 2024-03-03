@@ -5,4 +5,5 @@ app_name = 'course'
 urlpatterns = [
     # path('list/', views.CourseCategoryListView.as_view(), name='category_list'),
     # path('add_cart/', views.AddCartView.as_view(), name='add_cart')
+    path('view_course/', views.ViewCourseView.as_view(), name='view_course')
 ]

@@ -19,7 +19,8 @@ DEBUG = True
 
 if DEBUG:
     ALLOWED_HOSTS = ['*']
-    CALLBACK_URL = 'http://127.0.0.1:8000/api/cart/zarin/verify/'
+    # CALLBACK_URL = 'http://127.0.0.1:8000/api/cart/zarin/verify/'
+    CALLBACK_URL = 'https://animmo.ir/api/cart/zarin/verify/'
 
     # DATABASES = {
     #     'default': {

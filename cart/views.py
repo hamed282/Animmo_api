@@ -119,8 +119,8 @@ class CartPayView(APIView):
 
 
 class CartPayVerify(APIView):
-    # authentication_classes = [JWTAuthentication]
-    # permission_classes = [IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
         if request.GET.get('Status') == 'OK':

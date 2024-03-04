@@ -12,14 +12,10 @@ class MyCourseView(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
-    def post(self, request):
-        """
-        parameters:
-        1. phone_number
-        """
-        form = request.data
-        phone_number = form['phone_number']
-        user = get_object_or_404(User, phone_number=phone_number)
+    def get(self, request):
+
+        # user_id = self.request.query_params.get('user_id', None)
+        user = get_object_or_404(User, id=request.user.id)
         my_course = UserCourseModel.objects.filter(user=user)
         ser_my_course = UserCourseSerializer(instance=my_course, many=True)
 

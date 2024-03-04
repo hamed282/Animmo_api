@@ -230,7 +230,7 @@ LANGUAGES = [
 ]
 
 MERCHANT = "af49f6e8-a461-4a6f-ad2c-4883f7098ae4"
-SANDBOX = True
+SANDBOX = False
 
 if SANDBOX:
     sandbox = 'sandbox'

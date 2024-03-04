@@ -1,5 +1,6 @@
 from rest_framework.views import APIView
 from .service import Cart
+from django.http import HttpResponseRedirect
 from rest_framework.response import Response
 from . models import OrderModel, OrderItemModel
 from user_panel.models import UserCourseModel
@@ -186,13 +187,15 @@ class CartPayVerify(APIView):
                         UserCourseModel.objects.create(user=user, course=course,
                                                        spotplayer_license=spotplayer_license, price=price)
 
-                    return Response({'details': 'Transaction success'}, status=status.HTTP_200_OK)
-
+                    # return Response({'details': 'Transaction success'}, status=status.HTTP_200_OK)
+                    return HttpResponseRedirect(redirect_to='https://animmo.ir/api/user_panel/my_course/')
                 else:
-                    return Response({'details': 'Transaction failed or canceled by user'}, status=response.Status)
-
+                    # return Response({'details': 'Transaction failed or canceled by user'}, status=response.Status)
+                    return HttpResponseRedirect(redirect_to='https://animmo.ir/api/user_panel/my_course/')
             else:
-                return Response({'details': 'Transaction failed or canceled by user'}, status=status.HTTP_406_NOT_ACCEPTABLE)
-
+                # return Response({'details': 'Transaction failed or canceled by user'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+                return HttpResponseRedirect(redirect_to='https://animmo.ir/api/user_panel/my_course/')
         else:
-            return Response({'details': 'Transaction failed or canceled by user'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+            # return Response({'details': 'Transaction failed or canceled by user'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+            return HttpResponseRedirect(redirect_to='https://animmo.ir/api/user_panel/my_course/')
+

@@ -119,15 +119,17 @@ class CartPayView(APIView):
 
 
 class CartPayVerify(APIView):
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
+    # authentication_classes = [JWTAuthentication]
+    # permission_classes = [IsAuthenticated]
 
     def get(self, request):
+
         if request.GET.get('Status') == 'OK':
 
             authority = request.GET.get('Authority')
             try:
                 order = OrderModel.objects.get(authority=authority)
+                user = order.orders.all()
             except:
                 return Response({'details': 'Authority Code not found'}, status=status.HTTP_401_UNAUTHORIZED)
 
@@ -159,7 +161,7 @@ class CartPayVerify(APIView):
                             course = item.course
                             price = course.get_off_price()
 
-                            phone_number = request.user.phone_number
+                            phone_number = user.phone_number
                             spotplayer_license = course.spotplayer_license
 
                             # Spotplayer
@@ -181,7 +183,7 @@ class CartPayVerify(APIView):
 
                             spotplayer_license = 'Wait'
 
-                        UserCourseModel.objects.create(user=request.user, course=course,
+                        UserCourseModel.objects.create(user=user, course=course,
                                                        spotplayer_license=spotplayer_license, price=price)
 
                     return Response({'details': 'Transaction success'}, status=status.HTTP_200_OK)

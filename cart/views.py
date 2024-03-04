@@ -129,7 +129,7 @@ class CartPayVerify(APIView):
             authority = request.GET.get('Authority')
             try:
                 order = OrderModel.objects.get(authority=authority)
-                user = order.orders.all()
+                # user = order.orders.all()
             except:
                 return Response({'details': 'Authority Code not found'}, status=status.HTTP_401_UNAUTHORIZED)
 

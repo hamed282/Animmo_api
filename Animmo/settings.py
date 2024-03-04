@@ -56,6 +56,12 @@ else:
             'PORT': '',
         }
     }
+    # DATABASES = {
+    #     'default': {
+    #         'ENGINE': 'django.db.backends.sqlite3',
+    #         'NAME': BASE_DIR / 'db.sqlite3',
+    #     }
+    # }
 
     STATIC_URL = '/django-static/'
     STATIC_ROOT = "staticfiles"
@@ -230,7 +236,7 @@ LANGUAGES = [
 ]
 
 MERCHANT = "af49f6e8-a461-4a6f-ad2c-4883f7098ae4"
-SANDBOX = False
+SANDBOX = True
 
 if SANDBOX:
     sandbox = 'sandbox'

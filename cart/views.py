@@ -188,14 +188,14 @@ class CartPayVerify(APIView):
                                                        spotplayer_license=spotplayer_license, price=price)
 
                     # return Response({'details': 'Transaction success'}, status=status.HTTP_200_OK)
-                    return HttpResponseRedirect(redirect_to='https://animmo.ir/api/user_panel/my_course/')
+                    return HttpResponseRedirect(redirect_to='https://animmo.ir/userProfile/')
                 else:
                     # return Response({'details': 'Transaction failed or canceled by user'}, status=response.Status)
-                    return HttpResponseRedirect(redirect_to='https://animmo.ir/api/user_panel/my_course/')
+                    return HttpResponseRedirect(redirect_to='https://animmo.ir/userProfile/')
             else:
                 # return Response({'details': 'Transaction failed or canceled by user'}, status=status.HTTP_406_NOT_ACCEPTABLE)
-                return HttpResponseRedirect(redirect_to='https://animmo.ir/api/user_panel/my_course/')
+                return HttpResponseRedirect(redirect_to='https://animmo.ir/userProfile/')
         else:
             # return Response({'details': 'Transaction failed or canceled by user'}, status=status.HTTP_406_NOT_ACCEPTABLE)
-            return HttpResponseRedirect(redirect_to='https://animmo.ir/api/user_panel/my_course/')
+            return HttpResponseRedirect(redirect_to='https://animmo.ir/userProfile/')
 

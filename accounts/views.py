@@ -68,6 +68,17 @@ class RegisterVerifyCodeView(APIView):
                                          phone_number=form['phone_number'])
                 code_instance.delete()
 
+                try:
+                    user = User.objects.get(phone_number=form['phone_number'])
+                    token_access = AccessToken.for_user(user)
+                    token_refresh = RefreshToken.for_user(user)
+                    return Response(data={'massage': 'ورود با موفقیت انجام شد!',
+                                          'access': str(token_access),
+                                          'refresh': str(token_refresh)},
+                                    status=status.HTTP_200_OK)
+                except:
+                    user = None
+
                 return Response(data=(ser_data.data, {'massage': 'ثبت نام با موفقیت انجام شد!', 'status': '201'}), status=status.HTTP_201_CREATED)
             else:
                 return Response(data={'massage': 'کد یکبار مصرف اشتباه است!', 'status': '203'}, status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)

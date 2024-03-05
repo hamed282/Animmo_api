@@ -38,7 +38,6 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
 class HeaderImageView(APIView):
-    # authentication_classes = [JWTAuthentication]
     # permission_classes = [IsAuthenticated]
     def get(self, request):
         home_setting = HomeSettingModel.objects.all()
@@ -48,7 +47,6 @@ class HeaderImageView(APIView):
 
 
 class CourseCategoryView(APIView):
-    # authentication_classes = [JWTAuthentication]
 
     def get(self, request):
         course_category = CourseCategoryModel.objects.all()
@@ -58,7 +56,6 @@ class CourseCategoryView(APIView):
 
 
 class CourseSubcategoryView(APIView):
-    # authentication_classes = [JWTAuthentication]
     def get(self, request):
         course_subcategory = CourseSubCategoryModel.objects.all()
         ser_course_subcategory = CourseSubCategorySerializer(instance=course_subcategory, many=True)
@@ -67,7 +64,6 @@ class CourseSubcategoryView(APIView):
 
 
 class SampleExerciseView(APIView):
-    # authentication_classes = [JWTAuthentication]
 
     def get(self, request):
         sample_exercise = SampleExerciseModel.objects.all()
@@ -77,10 +73,9 @@ class SampleExerciseView(APIView):
 
 
 class CourseView(APIView):
-    # authentication_classes = [JWTAuthentication]
 
     def get(self, request):
-
+        user = request.user
         course = CourseModel.objects.all()
         ser_course = CourseSerializer(instance=course, many=True)
 
@@ -88,7 +83,6 @@ class CourseView(APIView):
 
 
 class FeedbackView(APIView):
-    # authentication_classes = [JWTAuthentication]
 
     def get(self, request):
         feedback = FeedbackModel.objects.all()

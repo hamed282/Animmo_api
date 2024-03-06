@@ -55,7 +55,7 @@ class ViewCourseView(APIView):
     def get(self, request):
         course_id = self.request.query_params.get('id', None)
 
-        course = get_object_or_404(CourseModel, slug=course_id)
+        course = get_object_or_404(CourseModel, id=course_id)
         ser_course = CourseViewSerializer(instance=course)
 
         return Response(data=ser_course.data)

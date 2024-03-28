@@ -1,6 +1,7 @@
 from django.db import models
 from accounts.models import User
 from django.utils.html import mark_safe
+from django_ckeditor_5.fields import CKEditor5Field
 
 
 class HomeSettingModel(models.Model):
@@ -20,3 +21,8 @@ class FeedbackModel(models.Model):
     available = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     class_des = models.CharField(max_length=20, default='feedback')
+
+
+class GuideModel(models.Model):
+    faq = CKEditor5Field(config_name='extends')
+    spot_player = CKEditor5Field(config_name='extends')

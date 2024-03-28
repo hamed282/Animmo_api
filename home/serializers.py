@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import HomeSettingModel, FeedbackModel
+from .models import HomeSettingModel, FeedbackModel, GuideModel
 
 
 class HeaderImageSerializer(serializers.ModelSerializer):
@@ -14,4 +14,10 @@ class FeedbackSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = FeedbackModel
+        fields = '__all__'
+
+
+class GuideSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GuideModel
         fields = '__all__'

@@ -1,10 +1,10 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from course.models import CourseCategoryModel, CourseSubCategoryModel, CourseModel, SampleExerciseModel
-from .models import HomeSettingModel, FeedbackModel
+from .models import HomeSettingModel, FeedbackModel, GuideModel
 from course.serializers import CourseCategorySerializer, CourseSubCategorySerializer, CourseSerializer,\
     SampleExerciseSerializer
-from .serializers import HeaderImageSerializer, FeedbackSerializer
+from .serializers import HeaderImageSerializer, FeedbackSerializer, GuideSerializer
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
@@ -98,3 +98,8 @@ class FeedbackView(APIView):
 #         if ser_data.is_valid():
 
 
+class GuideView(APIView):
+    def get(self, request):
+        guide = GuideModel.objects.all()
+        ser_guide = GuideSerializer(instance=guide, many=True)
+        return Response(data=ser_guide.data)

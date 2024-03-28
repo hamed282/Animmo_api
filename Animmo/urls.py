@@ -19,6 +19,7 @@ urlpatterns = i18n_patterns(
     path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
     path("ckeditor5/", include('django_ckeditor_5.urls')),
+    path('tinymce/', include('tinymce.urls')),
     prefix_default_language=False)
 # ]
 

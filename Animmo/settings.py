@@ -91,6 +91,7 @@ INSTALLED_APPS = [
     'cart.apps.CartConfig',
     'user_panel.apps.UserPanelConfig',
     'django_ckeditor_5',
+    'tinymce',
 ]
 
 SITE_ROOT = os.path.dirname(os.path.realpath(__name__))

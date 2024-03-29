@@ -15,7 +15,7 @@ SECRET_KEY = 'django-insecure-@^mt)pp$*muc8kzp#02w@ww+5fxji8pqdi&6makp4@2+%t#$)e
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = False
+DEBUG = True
 
 if DEBUG:
     ALLOWED_HOSTS = ['*']
@@ -92,6 +92,7 @@ INSTALLED_APPS = [
     'user_panel.apps.UserPanelConfig',
     'django_ckeditor_5',
     'tinymce',
+    'django_celery_beat',
 ]
 
 SITE_ROOT = os.path.dirname(os.path.realpath(__name__))

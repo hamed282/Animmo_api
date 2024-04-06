@@ -17,7 +17,7 @@ class User(AbstractBaseUser):
     REQUIRED_FIELDS = ['first_name', 'last_name']
 
     def __str__(self):
-        return self.phone_number
+        return f'{self.first_name} {self.last_name}'
 
 
     def has_perm(self, perm, obj=None):

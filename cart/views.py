@@ -163,7 +163,7 @@ class CartPayVerify(APIView):
                             price = course.get_off_price()
 
                             phone_number = user.phone_number
-                            spotplayer_license = course.spotplayer_license
+                            spotplayer_license = course.spot_player_license
 
                             # Spotplayer
                             headers = {'$API': settings.API_KEY,

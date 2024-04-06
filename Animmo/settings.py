@@ -32,7 +32,7 @@ if DEBUG:
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'animmo_db',
-            'USER': 'animmo_user_db',
+            'USER': 'animmo_user_db2',
             'PASSWORD': 'wdeds@@#434H!',
             'HOST': 'localhost',
             'PORT': '',

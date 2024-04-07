@@ -5,6 +5,7 @@ from .models import HomeSettingModel, FeedbackModel, GuideModel
 from course.serializers import CourseCategorySerializer, CourseSubCategorySerializer, CourseSerializer,\
     SampleExerciseSerializer
 from .serializers import HeaderImageSerializer, FeedbackSerializer, GuideSerializer
+from utils import hits_count
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
@@ -40,6 +41,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 class HeaderImageView(APIView):
     # permission_classes = [IsAuthenticated]
     def get(self, request):
+        hits_count(request)
         home_setting = HomeSettingModel.objects.all()
         ser_home_setting = HeaderImageSerializer(instance=home_setting, many=True)
 

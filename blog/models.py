@@ -14,7 +14,7 @@ class BlogModel(models.Model):
     slug = models.SlugField(max_length=100, unique=True)
     icon = models.ImageField(upload_to='images/blog/images/')
     available = models.BooleanField(default=False)
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateField(auto_now_add=True)
 
     def save(self, **kwargs):
         self.slug = slugify(self.title, allow_unicode=True)

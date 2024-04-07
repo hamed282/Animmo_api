@@ -4,6 +4,7 @@ from django.utils.text import slugify
 
 
 class CourseCategoryModel(models.Model):
+    objects = None
     category = models.CharField(max_length=50)
     slug = models.SlugField(max_length=100, unique=True)
     icon = models.FileField(upload_to='images/icon/category/')
@@ -18,6 +19,7 @@ class CourseCategoryModel(models.Model):
 
 
 class CourseSubCategoryModel(models.Model):
+    objects = None
     category = models.ForeignKey(CourseCategoryModel, on_delete=models.CASCADE, related_name='category_subcategory')
     subcategory = models.CharField(max_length=50)
     slug = models.SlugField(max_length=100, unique=True)
@@ -71,6 +73,7 @@ class CourseModel(models.Model):
 
 class SampleExerciseModel(models.Model):
 
+    objects = None
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_sample')
     category = models.ForeignKey(CourseCategoryModel, on_delete=models.CASCADE, related_name='category_sample')
     subcategory = models.ForeignKey(CourseSubCategoryModel, on_delete=models.CASCADE, related_name='subcategory_sample')

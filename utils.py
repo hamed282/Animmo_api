@@ -1,6 +1,5 @@
 import requests
-# from adminpanel.models import IndexModel, SocialSettingModel
-# from home.models import FeedbackModel, CategoryModel, HitsCountModel, TotalHitsModel
+from home.models import HitsCountModel, TotalHitsModel
 from uuid import getnode as get_mac_address
 from datetime import timedelta
 from django.utils import timezone
@@ -45,34 +44,33 @@ def get_client_ip(request):
     return ip
 
 
-# def hits_count(request):
-#     ip = get_client_ip(request)
-#     mac = get_mac_address()
-#     try:
-#         count = HitsCountModel.objects.get(ip=ip, mac=mac)
-#         if count.updated + timedelta(hours=12) < timezone.now():
-#             count.count += 1
-#             count.save()
-#         try:
-#             total_count = TotalHitsModel.objects.get(date=timezone.now().date())
-#             total_count.hits += 1
-#             total_count.save()
-#         except:
-#             TotalHitsModel.objects.create(hits=1, date=timezone.now().date())
-#     except:
-#         HitsCountModel.objects.create(ip=ip, mac=mac, count=1)
-#         try:
-#             total_count = TotalHitsModel.objects.get(date=timezone.now().date())
-#             total_count.hits += 1
-#             total_count.save()
-#         except:
-#             TotalHitsModel.objects.create(hits=1, date=timezone.now().date())
-#
-#     # ip = get_client_ip(request)
-#     # mac = get_mac_address()
-#     # count = HitsCountModel.objects.get(ip=ip, mac=mac, created=datetime.now(), updated=datetime.now())
-#     # print(count.updated)
-#     # print(datetime.now())
-#     # if (count.updated + timedelta(hours=12)) < datetime.now():
-#     #     print(datetime.now())
+def hits_count(request):
+    ip = get_client_ip(request)
+    mac = get_mac_address()
+    try:
+        count = HitsCountModel.objects.get(ip=ip, mac=mac)
+        if count.updated + timedelta(hours=12) < timezone.now():
+            count.count += 1
+            count.save()
+        try:
+            total_count = TotalHitsModel.objects.get(date=timezone.now().date())
+            total_count.hits += 1
+            total_count.save()
+        except:
+            TotalHitsModel.objects.create(hits=1, date=timezone.now().date())
+    except:
+        HitsCountModel.objects.create(ip=ip, mac=mac, count=1)
+        try:
+            total_count = TotalHitsModel.objects.get(date=timezone.now().date())
+            total_count.hits += 1
+            total_count.save()
+        except:
+            TotalHitsModel.objects.create(hits=1, date=timezone.now().date())
 
+    # ip = get_client_ip(request)
+    # mac = get_mac_address()
+    # count = HitsCountModel.objects.get(ip=ip, mac=mac, created=datetime.now(), updated=datetime.now())
+    # print(count.updated)
+    # print(datetime.now())
+    # if (count.updated + timedelta(hours=12)) < datetime.now():
+    #     print(datetime.now())

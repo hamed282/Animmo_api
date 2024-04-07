@@ -99,7 +99,7 @@ INSTALLED_APPS = [
     'user_panel.apps.UserPanelConfig',
     'django_ckeditor_5',
     'tinymce',
-    'django_celery_beat',
+    # 'django_celery_beat',
 ]
 
 SITE_ROOT = os.path.dirname(os.path.realpath(__name__))

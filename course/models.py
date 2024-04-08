@@ -41,7 +41,7 @@ class CourseModel(models.Model):
     course = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100, unique=True)
     image = models.ImageField(upload_to='images/course/')
-    intro = models.FileField(upload_to='video/course/intro/')
+    # intro = models.FileField(upload_to='video/course/intro/')
     spot_player_license = models.CharField(max_length=512)
     is_active = models.BooleanField(default=False)
     price = models.IntegerField()

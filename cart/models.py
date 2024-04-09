@@ -35,3 +35,15 @@ class OrderItemModel(models.Model):
 
     def get_cost(self):
         return self.price * self.quantity
+
+
+class DiscountModel(models.Model):
+    objects = None
+    referral = models.CharField(max_length=100)
+    referral_code = models.CharField(max_length=50, unique=True)
+    discount_percent = models.CharField(max_length=20, blank=True, null=True)
+    discount_amount = models.CharField(max_length=20, blank=True, null=True)
+    active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.referral

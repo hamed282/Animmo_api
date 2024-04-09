@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import OrderModel, OrderItemModel
+from .models import OrderModel, OrderItemModel, DiscountModel
 
 
 class OrderItemInline(admin.TabularInline):
@@ -13,3 +13,9 @@ class OrderAdmin(admin.ModelAdmin):
     list_filter = ('paid',)
     inlines = (OrderItemInline, )
 
+
+class DiscountModelAdmin(admin.ModelAdmin):
+    list_display = ['referral', 'referral_code', 'discount_percent', 'discount_amount', 'active']
+
+
+admin.site.register(DiscountModel, DiscountModelAdmin)

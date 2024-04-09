@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from .service import Cart
 from django.http import HttpResponseRedirect
 from rest_framework.response import Response
-from . models import OrderModel, OrderItemModel
+from . models import OrderModel, OrderItemModel, DiscountModel
 from user_panel.models import UserCourseModel
 from course.models import CourseModel
 from rest_framework_simplejwt.authentication import JWTAuthentication
@@ -74,23 +74,36 @@ class CartPayView(APIView):
 
         sample json:
 
-        [
-        {"course_id": "1"} , {"course_id": "2"}
-        ]
+       {
+       "course": [
+                {"course_id": "1"} , {"course_id": "2"}
+                 ],
+       "referral_code": "ASDF"
+       }
         """
         forms = request.data
         if len(forms) > 0:
 
             order = OrderModel.objects.create(user=request.user)
+            try:
+                discount_object = DiscountModel.objects.get(referral_code=forms['referral_code'])
+                discount = discount_object.discount_percent
+                discount_object.delete()
+
+            except:
+                discount = 0
 
             quantity = 1
-            for form in forms:
+            for form in forms['course']:
                 course = CourseModel.objects.get(id=form['course_id'])
                 price = course.get_off_price()
                 OrderItemModel.objects.create(order=order, course=course, price=price, quantity=quantity)
 
             ############################################
-            amount = order.get_total_price()
+
+            amount = str(int(order.get_total_price()) - int(order.get_total_price()) * (int(discount)/100))
+
+            print(amount)
             description = f' خرید دوره '
             phone = request.user.phone_number
 
@@ -114,7 +127,7 @@ class CartPayView(APIView):
                     order.save()
                     return Response({'redirect to : ': url}, status=200)
                 else:
-                    return Response({'Error code: ': str(response.Status)}, status=400)
+                    return Response({'Error code: ': 400}, status=400)
             else:
                 return Response({'details': str(response.json()['errors'])})
 

@@ -21,6 +21,7 @@ class UserRegisterView(APIView):
         1. first_name
         2. last_name
         3. phone_number
+        4. deaf
         """
         form = request.data
         ser_data = UserSerializer(data=form)
@@ -30,7 +31,8 @@ class UserRegisterView(APIView):
             if not user:
                 request.session['register_information'] = {'first_name': form['first_name'],
                                                            'last_name': form['last_name'],
-                                                           'phone_number': phone_number}
+                                                           'phone_number': phone_number,
+                                                           'deaf': form['deaf']}
                 code = random.randint(10000, 99999)
                 send_otp_code_register(form['phone_number'], code)
                 if OtpCode.objects.filter(phone_number=phone_number).exists():
@@ -54,6 +56,7 @@ class RegisterVerifyCodeView(APIView):
         2. code
         3. first_name
         4. last_name
+        5. deaf
         """
         form = request.data
         ser_data = OtpCodeRegisterSerializer(data=form)
@@ -65,7 +68,7 @@ class RegisterVerifyCodeView(APIView):
             code_instance = OtpCode.objects.get(phone_number=form['phone_number'])
             if int(code_instance.code) == int(persian_to_english(form['code'])):
                 User.objects.create_user(first_name=form['first_name'], last_name=form['last_name'],
-                                         phone_number=form['phone_number'])
+                                         phone_number=form['phone_number'], deaf=form['deaf'])
                 code_instance.delete()
 
                 try:

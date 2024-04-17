@@ -102,7 +102,7 @@ class CartPayView(APIView):
             for form in forms['course']:
                 course = CourseModel.objects.get(id=form['course_id'], deaf=deaf)
                 price = course.get_off_price()
-                OrderItemModel.objects.create(order=order, course=course, price=price, quantity=quantity)
+                OrderItemModel.objects.create(order=order, course=course, deaf=deaf, price=price, quantity=quantity)
 
             ############################################
 

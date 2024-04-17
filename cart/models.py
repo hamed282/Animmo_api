@@ -27,6 +27,7 @@ class OrderItemModel(models.Model):
     objects = None
     order = models.ForeignKey(OrderModel, on_delete=models.CASCADE, related_name='items')
     course = models.ForeignKey(CourseModel, on_delete=models.CASCADE)
+    deaf = models.BooleanField(default=False)
     price = models.IntegerField()
     quantity = models.IntegerField(default=1)
 

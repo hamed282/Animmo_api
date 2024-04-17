@@ -24,22 +24,22 @@ if DEBUG:
     CALLBACK_URL = 'http://127.0.0.1:8000/api/cart/zarin/verify/'
     # CALLBACK_URL = 'https://animmo.ir/api/cart/zarin/verify/'
 
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
     # DATABASES = {
     #     'default': {
-    #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #         'NAME': 'animmo_db',
-    #         'USER': 'animmo_user_db2',
-    #         'PASSWORD': 'wdeds@@#434H!',
-    #         'HOST': 'localhost',
-    #         'PORT': '',
+    #         'ENGINE': 'django.db.backends.sqlite3',
+    #         'NAME': BASE_DIR / 'db.sqlite3',
     #     }
     # }
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'animmo_db',
+            'USER': 'animmo_user_db2',
+            'PASSWORD': 'wdeds@@#434H!',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
+    }
 
     STATIC_URL = 'static/'
     STATICFILES_DIRS = (

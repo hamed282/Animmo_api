@@ -9,7 +9,7 @@ class UserAdmin(BaseUserAdmin):
     form = UserChangeForm
     add_form = UserCreationForm
 
-    list_display = ['first_name', 'last_name', 'phone_number']
+    list_display = ['first_name', 'last_name', 'phone_number', 'deaf']
     list_filter = ['is_active']
 
     readonly_fields = ['last_login']
@@ -20,10 +20,10 @@ class UserAdmin(BaseUserAdmin):
     )
 
     add_fieldsets = (
-        (None, {'fields': ('first_name', 'last_name', 'phone_number')}),
+        (None, {'fields': ('first_name', 'last_name', 'phone_number', 'deaf')}),
     )
 
-    search_fields = ['phone_number', 'first_name', 'last_name']
+    search_fields = ['phone_number', 'first_name', 'last_name', 'deaf']
     ordering = ['first_name', 'last_name']
 
     filter_horizontal = ()

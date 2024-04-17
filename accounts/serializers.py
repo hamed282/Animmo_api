@@ -5,7 +5,7 @@ from .models import User, OtpCode
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'phone_number']
+        fields = ['first_name', 'last_name', 'phone_number', 'deaf']
 
 
 class OtpCodeRegisterSerializer(serializers.Serializer):

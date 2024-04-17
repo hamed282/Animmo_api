@@ -39,6 +39,7 @@ class CourseModel(models.Model):
     category = models.ForeignKey(CourseCategoryModel, on_delete=models.CASCADE, related_name='category_course')
     subcategory = models.ForeignKey(CourseSubCategoryModel, on_delete=models.CASCADE, related_name='subcategory_course')
     course = models.CharField(max_length=100)
+    subtitle = models.BooleanField(default=False)
     slug = models.SlugField(max_length=100, unique=True)
     image = models.ImageField(upload_to='images/course/')
     intro = models.FileField(upload_to='video/course/intro/', null=True, blank=True)

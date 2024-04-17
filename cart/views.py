@@ -81,6 +81,11 @@ class CartPayView(APIView):
        "referral_code": "ASDF"
        }
         """
+        if request.user.deaf:
+            deaf = True
+        else:
+            deaf = False
+
         forms = request.data
         if len(forms) > 0:
 
@@ -95,7 +100,7 @@ class CartPayView(APIView):
 
             quantity = 1
             for form in forms['course']:
-                course = CourseModel.objects.get(id=form['course_id'])
+                course = CourseModel.objects.get(id=form['course_id'], deaf=deaf)
                 price = course.get_off_price()
                 OrderItemModel.objects.create(order=order, course=course, price=price, quantity=quantity)
 

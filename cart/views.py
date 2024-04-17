@@ -100,7 +100,7 @@ class CartPayView(APIView):
 
             quantity = 1
             for form in forms['course']:
-                course = CourseModel.objects.get(id=form['course_id'], deaf=deaf)
+                course = CourseModel.objects.get(id=form['course_id'])
                 price = course.get_off_price()
                 OrderItemModel.objects.create(order=order, course=course, deaf=deaf, price=price, quantity=quantity)
 
@@ -181,7 +181,10 @@ class CartPayVerify(APIView):
                             price = course.get_off_price()
 
                             phone_number = user.phone_number
-                            spotplayer_license = course.spot_player_license
+                            if request.user.deaf:
+                                spotplayer_license = course.spot_player_license_subtitle
+                            else:
+                                spotplayer_license = course.spot_player_license
 
                             # Spotplayer
                             headers = {'$API': settings.API_KEY,
@@ -201,6 +204,8 @@ class CartPayVerify(APIView):
                             price = course.get_off_price()
 
                             spotplayer_license = 'Wait'
+
+
 
                         UserCourseModel.objects.create(user=user, course=course,
                                                        spotplayer_license=spotplayer_license, price=price)

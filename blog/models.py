@@ -9,7 +9,7 @@ class BlogModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='rel_user_blog')
     banner = models.ImageField(upload_to='images/blog/banner/')
     title = models.CharField(max_length=50)
-    abstract = models.TextField()
+    abstract = models.CharField(max_length=200)
     # body = CKEditor5Field(config_name='extends')
     body = HTMLField()
     slug = models.SlugField(max_length=100, unique=True)

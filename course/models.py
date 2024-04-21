@@ -76,8 +76,8 @@ class SampleExerciseModel(models.Model):
 
     objects = None
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_sample')
-    category = models.ForeignKey(CourseCategoryModel, on_delete=models.CASCADE, related_name='category_sample')
-    subcategory = models.ForeignKey(CourseSubCategoryModel, on_delete=models.CASCADE, related_name='subcategory_sample')
+    # category = models.ForeignKey(CourseCategoryModel, on_delete=models.CASCADE, related_name='category_sample')
+    # subcategory = models.ForeignKey(CourseSubCategoryModel, on_delete=models.CASCADE, related_name='subcategory_sample')
     course = models.ForeignKey(CourseModel, on_delete=models.CASCADE, related_name='course_sample')
     sample_exercise = models.FileField(upload_to='video/sample/')
     created = models.DateTimeField(auto_now=True)

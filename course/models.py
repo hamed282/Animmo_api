@@ -83,7 +83,7 @@ class SampleExerciseModel(models.Model):
     created = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.sample_exercise
+        return f'{self.sample_exercise}'
 
 
 class OrderModel(models.Model):

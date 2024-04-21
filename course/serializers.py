@@ -51,10 +51,10 @@ class CourseSerializer(serializers.ModelSerializer):
 
 
 class SampleExerciseSerializer(serializers.ModelSerializer):
-    course = serializers.SlugRelatedField(read_only=True, slug_field='slug')
-    subcategory = serializers.SlugRelatedField(read_only=True, slug_field='slug')
-    category = serializers.SlugRelatedField(read_only=True, slug_field='slug')
-    user = serializers.SlugRelatedField(read_only=True, slug_field='last_name')
+    course = serializers.SlugRelatedField(read_only=True, slug_field='course')
+    # subcategory = serializers.SlugRelatedField(read_only=True, slug_field='slug')
+    # category = serializers.SlugRelatedField(read_only=True, slug_field='slug')
+    user = serializers.SlugRelatedField(read_only=True, slug_field='first_name')
 
     class Meta:
         model = SampleExerciseModel

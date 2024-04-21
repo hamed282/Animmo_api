@@ -15,40 +15,40 @@ SECRET_KEY = 'django-insecure-@^mt)pp$*muc8kzp#02w@ww+5fxji8pqdi&6makp4@2+%t#$)e
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = False
+DEBUG = True
 
 if DEBUG:
-    ALLOWED_HOSTS = ['*']
-    # ALLOWED_HOSTS = ['localhost', '185.105.239.50', 'animmo.ir', 'www.animmo.ir', '127.0.0.1']
+    # ALLOWED_HOSTS = ['*']
+    ALLOWED_HOSTS = ['localhost', '185.105.239.50', 'animmo.ir', 'www.animmo.ir', '127.0.0.1']
 
     CALLBACK_URL = 'http://127.0.0.1:8000/api/cart/zarin/verify/'
     # CALLBACK_URL = 'https://animmo.ir/api/cart/zarin/verify/'
 
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
     # DATABASES = {
     #     'default': {
-    #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #         'NAME': 'animmo_db',
-    #         'USER': 'animmo_user_db2',
-    #         'PASSWORD': 'wdeds@@#434H!',
-    #         'HOST': 'localhost',
-    #         'PORT': '',
+    #         'ENGINE': 'django.db.backends.sqlite3',
+    #         'NAME': BASE_DIR / 'db.sqlite3',
     #     }
     # }
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'animmo_db',
+            'USER': 'animmo_user_db2',
+            'PASSWORD': 'wdeds@@#434H!',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
+    }
 
-    STATIC_URL = 'static/'
-    STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'static/'),
-    )
+    # STATIC_URL = 'static/'
+    # STATICFILES_DIRS = (
+    #     os.path.join(BASE_DIR, 'static/'),
+    # )
 
-    # STATIC_URL = '/django-static/'
-    # STATIC_ROOT = "staticfiles"
-    # CSRF_TRUSTED_ORIGINS = ['https://*.animmo.ir', 'https://*.127.0.0.1']
+    STATIC_URL = '/django-static/'
+    STATIC_ROOT = "staticfiles"
+    CSRF_TRUSTED_ORIGINS = ['https://*.animmo.ir', 'https://*.127.0.0.1']
 
 else:
     ALLOWED_HOSTS = ['localhost', '185.105.239.50', 'animmo.ir', 'www.animmo.ir', '127.0.0.1']

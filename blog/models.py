@@ -6,6 +6,7 @@ from django.utils.text import slugify
 
 
 class BlogModel(models.Model):
+    objects = None
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='rel_user_blog')
     banner = models.ImageField(upload_to='images/blog/banner/')
     title = models.CharField(max_length=50)

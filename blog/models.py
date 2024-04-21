@@ -10,7 +10,7 @@ class BlogModel(models.Model):
     banner = models.ImageField(upload_to='images/blog/banner/')
     title = models.CharField(max_length=50)
     # body = CKEditor5Field(config_name='extends')
-    body = models.TextField()
+    body = HTMLField()
     slug = models.SlugField(max_length=100, unique=True)
     icon = models.ImageField(upload_to='images/blog/images/')
     available = models.BooleanField(default=False)

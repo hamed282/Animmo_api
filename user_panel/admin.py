@@ -3,7 +3,7 @@ from .models import UserCourseModel
 
 
 class UserCourseAdmin(admin.ModelAdmin):
-    list_display = ['user', 'course']
+    list_display = ['user', 'course', 'spotplayer_license']
 
 
 admin.site.register(UserCourseModel, UserCourseAdmin)

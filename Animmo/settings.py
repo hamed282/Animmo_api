@@ -41,13 +41,13 @@ if DEBUG:
     #     }
     # }
 
-    STATIC_URL = 'static/'
-    STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'static/'),
-    )
+    # STATIC_URL = 'static/'
+    # STATICFILES_DIRS = (
+    #     os.path.join(BASE_DIR, 'static/'),
+    # )
 
-    # STATIC_URL = '/django-static/'
-    # STATIC_ROOT = "staticfiles"
+    STATIC_URL = '/django-static/'
+    STATIC_ROOT = "staticfiles"
     # CSRF_TRUSTED_ORIGINS = ['https://*.animmo.ir', 'https://*.127.0.0.1']
 
 else:

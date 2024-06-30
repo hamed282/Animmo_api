@@ -15,7 +15,7 @@ SECRET_KEY = 'django-insecure-@^mt)pp$*muc8kzp#02w@ww+5fxji8pqdi&6makp4@2+%t#$)e
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = True
+DEBUG = False
 
 if DEBUG:
     ALLOWED_HOSTS = ['*']
@@ -48,7 +48,7 @@ if DEBUG:
 
     STATIC_URL = '/django-static/'
     STATIC_ROOT = "staticfiles"
-    CSRF_TRUSTED_ORIGINS = ['http://194.146.123.62/', 'https://*.127.0.0.1']
+    CSRF_TRUSTED_ORIGINS = ['https://*.animmo.ir', 'https://*.127.0.0.1']
 
 else:
     ALLOWED_HOSTS = ['localhost', '185.105.239.50', 'animmo.ir', 'www.animmo.ir', '127.0.0.1']
